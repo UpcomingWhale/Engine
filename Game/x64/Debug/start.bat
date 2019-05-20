@@ -1,0 +1,1 @@
+game.exe -width 700 -height 700
