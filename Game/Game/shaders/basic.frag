@@ -15,5 +15,8 @@ in DATA
 void main()
 {
 	float intensity = 1.0/ length(fs_in.position.xy - light_pos);
-	color = texture(texture1, fs_in.TexCoord);//* intensity;
+	vec4 texColor = texture(texture1, fs_in.TexCoord);
+	if(texColor.a <0.1)
+		discard;
+	color = texColor;//* intensity;
 }
