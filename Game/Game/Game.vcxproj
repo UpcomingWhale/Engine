@@ -119,7 +119,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>H:\Code\C++\Game Design Project\Game\dep\glew-2.1.0\include;H:\Code\C++\Game Design Project\Game\dep\glfw-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dep\glew-2.1.0\include;$(SolutionDir)dep\glfw-3.2.1\include;$(SolutionDir)Game\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -127,10 +127,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>glew32.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>H:\Code\C++\Game Design Project\Game\dep\glew-2.1.0\lib\Release\x64;H:\Code\C++\Game Design Project\Game\dep\glfw-3.2.1\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\glew-2.1.0\lib\Release\x64;$(SolutionDir)dep\glfw-3.2.1\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\Window\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
   </ItemGroup>
@@ -141,16 +142,21 @@
     </None>
     <None Include="shaders\basic.frag" />
     <None Include="shaders\basic.vert" />
-    <None Include="shaders\brick.frag" />
-    <None Include="shaders\brick.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Renderer\2DRenderer\2dRenderer.h" />
+    <ClInclude Include="src\graphics\Renderer\Objects\Square.h" />
+    <ClInclude Include="src\graphics\Window\Window.h" />
+    <ClInclude Include="src\include.h" />
+    <ClInclude Include="src\Maths\eMaths.h" />
+    <ClInclude Include="src\opengl\Buffers\Buffer.h" />
+    <ClInclude Include="src\opengl\Buffers\IndexBuffer.h" />
+    <ClInclude Include="src\opengl\Buffers\VertexArray.h" />
     <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\utility\FileReader.h" />
+    <ClInclude Include="src\utility\ShaderLoader.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\brick.jfif" />
-    <Image Include="textures\brick2.jpg" />
-    <Image Include="textures\player.png" />
     <Image Include="textures\yuh.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

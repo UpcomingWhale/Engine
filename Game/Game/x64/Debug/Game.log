@@ -3,9 +3,18 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(1
   H:\Code\C++\Game Design Project\Game\dep\glfw-3.2.1\include\GLFW\glfw3.h(98): note: see previous definition of 'APIENTRY'
 H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(523): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
 H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(538): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
-H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(748): warning C4101: 'isCol': unreferenced local variable
-H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(918): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(927): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(932): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(619): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(620): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(741): warning C4101: 'isCol': unreferenced local variable
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(773): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(777): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(784): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(788): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(859): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(863): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(872): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(877): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(886): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+H:\Code\C++\Game Design Project\Game\Game\src\main.cpp(891): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Game.vcxproj -> H:\Code\C++\Game Design Project\Game\x64\Debug\Game.exe
