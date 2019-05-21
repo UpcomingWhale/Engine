@@ -157,6 +157,10 @@
     <ClInclude Include="src\utility\ShaderLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\brick.jfif" />
+    <Image Include="textures\brick2.jpg" />
+    <Image Include="textures\player.jpg" />
+    <Image Include="textures\player.png" />
     <Image Include="textures\yuh.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

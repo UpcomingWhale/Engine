@@ -70,5 +70,15 @@
     <Image Include="textures\yuh.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="textures\brick.jfif" />
+    <Image Include="textures\brick2.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\player.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="textures\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -110,12 +110,85 @@ int main(int argc, char* argv[])
 {
 	Window window(1280,720,"title");
 	Shader shader("shaders/basic.vert", "shaders/basic.frag");
-	shader.enable();
+	Shader brick("shaders/basic.vert", "shaders/basic.frag");
+	Shader player("shaders/basic.vert", "shaders/basic.frag");
+
+	unsigned char* image;
+	int h, w, comp;
+	GLuint texture;
+
+	image = stbi_load("textures/yuh.jpg", &w, &h, &comp, STBI_rgb_alpha);
+	if (image == nullptr)
+		throw(std::string("Failed to load texture"));
+
+	glGenTextures(1, &texture);
+	glActiveTexture(GL_TEXTURE0 + 0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+	
+	GLuint brickTex;
+	
+	image = stbi_load("textures/brick.jfif", &w, &h, &comp, STBI_rgb_alpha);
+	if (image == nullptr)
+		throw(std::string("Failed to load texture"));
+	glGenTextures(1, &brickTex);
+	glActiveTexture(GL_TEXTURE0 + 1);
+	glBindTexture(GL_TEXTURE_2D, brickTex);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+	GLuint playerTex;
+
+	image = stbi_load("textures/player.png", &w, &h, &comp, STBI_rgb_alpha);
+	if (image == nullptr)
+		throw(std::string("Failed to load texture"));
+	glGenTextures(1, &playerTex);
+	glActiveTexture(GL_TEXTURE0 + 2);
+	glBindTexture(GL_TEXTURE_2D, playerTex);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+	stbi_image_free(image);
+
+
+
 	mat4 *camera = new mat4(1.0f);
-	mat4 ortho = mat4::orthographic(0.0f, 1000.0f, 0.0f, 562.5f, 1.0f, 100.0f);
+	mat4 ortho = mat4::orthographic(0.0f, 1000.0f, 0.0f, 562.5f, 100.0f, 1.0f);
+	shader.enable();
 	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "pr_matrix"), 1, false, ortho.elements);
 	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "camera"), 1, false, camera->elements);
-	Square *square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(20, 20 ), vec4(1.0f, 0.3f, 1.0f, 1.0f), shader);
+	glUniform1i(glGetUniformLocation(shader.getProgram(), "texture1"), 0);
+
+	brick.enable();
+	glUniformMatrix4fv(glGetUniformLocation(brick.getProgram(), "pr_matrix"), 1, false, ortho.elements);
+	glUniformMatrix4fv(glGetUniformLocation(brick.getProgram(), "camera"), 1, false, camera->elements);
+	glUniform1i(glGetUniformLocation(brick.getProgram(), "texture1"), 1);
+
+	player.enable();
+	glUniformMatrix4fv(glGetUniformLocation(player.getProgram(), "pr_matrix"), 1, false, ortho.elements);
+	glUniformMatrix4fv(glGetUniformLocation(player.getProgram(), "camera"), 1, false, camera->elements);
+	glUniform1i(glGetUniformLocation(player.getProgram(), "texture1"), 2);
+
+
+	Square *square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), player);
 	Square *square2 = new Square(vec4(900.0f, 300.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
 	Square* square3 = new Square(vec4(400.0f, 200.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
 	Square* square4 = new Square(vec4(700.0f, 150.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
@@ -126,31 +199,25 @@ int main(int argc, char* argv[])
 	Square* square9 = new Square(vec4(1260.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
 	Square* square10 = new Square(vec4(1400.0f, 340.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader);
 
-	unsigned char* image;
-	int h, w, comp;
-	GLuint texture;
+	
 
-	image = stbi_load("textures/yuh.jpg", &w, &h, &comp, STBI_rgb_alpha);
-	glGenTextures(1, &texture);
-	//glActiveTexture(GL_TEXTURE0 + 0);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//glGenerateMipmap(GL_TEXTURE_2D);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	stbi_image_free(image);
-	Square* left_wall = new Square(vec4(-100.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader);
-	Square* floor = new Square(vec4(0.0f, 0.0f, 3.0f, 0.0f), vec2(4000.0f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader);
-	Square* ceiling = new Square(vec4(0.0f, 522.5f, 3.0f, 0.0f), vec2(4000.f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader);
-	Square* right_wall = new Square(vec4(4000.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader);
+	
+	
+	Square* left_wall = new Square(vec4(-100.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), brick);
+	Square* floor = new Square(vec4(0.0f, 0.0f, 3.0f, 0.0f), vec2(4000.0f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), brick);
+	Square* ceiling = new Square(vec4(0.0f, 522.5f, 3.0f, 0.0f), vec2(4000.f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), brick);
+	Square* right_wall = new Square(vec4(4000.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), brick);
 
 	Basic2DLayer layer1;
 	vec2* cameraPos = new vec2;
 	cameraPos->x = 0;
 	cameraPos->y = 0;
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	double x = 500;
 	double y = 0;
 
@@ -162,7 +229,7 @@ int main(int argc, char* argv[])
 	while (!window.ShouldClose())
 	{
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		if (GetKeyState('W') & 0x8000)
 		{
 			square1->changeYPos(square1->getPosition().y + 5.0f);
@@ -204,7 +271,15 @@ int main(int argc, char* argv[])
 		}
 
 		pEngine.CheckCollision(*square1,staticObjs, 13, *camera, *cameraPos); 
+
+		shader.enable();
 		glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "camera"), 1, false, camera->elements);
+		brick.enable();
+		glUniformMatrix4fv(glGetUniformLocation(brick.getProgram(), "camera"), 1, false, camera->elements);
+		player.enable();
+		glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "camera"), 1, false, camera->elements);
+
+		
 		layer1.submit(square2);
 		layer1.submit(square1);
 		layer1.submit(square3);
