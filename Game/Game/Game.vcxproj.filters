@@ -65,6 +65,9 @@
     <ClInclude Include="src\graphics\Renderer\Objects\Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Physics\PhysicsEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\yuh.jpg">

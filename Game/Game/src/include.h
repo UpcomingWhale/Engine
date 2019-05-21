@@ -23,3 +23,5 @@
 #include "graphics/Renderer/Objects/Square.h"
 
 #include "graphics/Renderer/2DRenderer/2dRenderer.h"
+
+#include "Physics/PhysicsEngine.h"

@@ -152,6 +152,7 @@
     <ClInclude Include="src\opengl\Buffers\Buffer.h" />
     <ClInclude Include="src\opengl\Buffers\IndexBuffer.h" />
     <ClInclude Include="src\opengl\Buffers\VertexArray.h" />
+    <ClInclude Include="src\Physics\PhysicsEngine.h" />
     <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\utility\FileReader.h" />
     <ClInclude Include="src\utility\ShaderLoader.h" />
