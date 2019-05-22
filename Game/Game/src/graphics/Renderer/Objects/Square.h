@@ -4,7 +4,9 @@
 struct VertexData
 {
 	vec3 vertex;
-	vec4 color;
+	vec2 uv;
+	float tid;
+	unsigned int color;
 };
 
 
@@ -18,6 +20,8 @@ protected:
 	vec4 m_Color;
 	VertexArray* m_VertexArray;
 	IndexBuffer* m_IndexBuffer;
+	GLuint textureID;
+	std::vector<vec2> m_UV;
 
 	Shader& m_Shader;
 
@@ -27,8 +31,8 @@ protected:
 
 	vec2 screenPos;
 public:
-	Square(vec4 position, vec2 size, vec4 color, Shader& shader)
-		:m_Position(position), m_Size(size), m_Color(color), m_Shader(shader)
+	Square(vec4 position, vec2 size, vec4 color, Shader& shader, GLuint texture)
+		:m_Position(position), m_Size(size), m_Color(color), m_Shader(shader), textureID(texture)
 	{
 		m_VertexArray = new VertexArray();
 		screenPos.x = position.x;
@@ -55,6 +59,13 @@ public:
 			1.0f, 1.0f
 			
 		};
+		
+		m_UV.push_back(vec2(0.0f, 1.0f));
+		m_UV.push_back(vec2(0.0f, 0.0f));
+		m_UV.push_back(vec2(1.0f, 0.0f));
+		m_UV.push_back(vec2(1.0f, 1.0f));
+
+
 		m_VertexArray->addBuffer(new Buffer(vertices, 4 * 3, 3), 0);
 		m_VertexArray->addBuffer(new Buffer(colors, 4 * 4, 4), 1);
 		m_VertexArray->addBuffer(new Buffer(texCoords, 2 * 4, 2), 2);
@@ -84,9 +95,12 @@ public:
 	void setColX(bool x) { colX = x; };
 	void setColY(bool y) { colY = y; }
 
+	inline const std::vector<vec2>& getUV() const { return m_UV; }
+	inline const GLuint getTexID() const { return textureID; }
 	vec2 getScreenPos() { return screenPos; }
 	void changeScreenPosX(float x) { screenPos.x = x; }
 	void changeScreenPosY(float y) { screenPos.y = y; }
+
 
 
 };
