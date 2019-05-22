@@ -160,6 +160,7 @@
   <ItemGroup>
     <Image Include="textures\brick.jfif" />
     <Image Include="textures\brick2.jpg" />
+    <Image Include="textures\heart.png" />
     <Image Include="textures\player.jpg" />
     <Image Include="textures\player.png" />
     <Image Include="textures\yuh.jpg" />

@@ -1,87 +1,101 @@
 #define _USE_MATH_DEFINES
 
 #include "include.h"
+#include "GL/glew.h"
+class Engine
+{
+public:
+	
+	Engine()
+	{
+		glClearColor(0.5f, 0.5f, 0.5f ,1.0f);
+
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	};
+	~Engine() {};
+	void BackGroudColor(vec4 color)
+	{
+		m_ClearColor = color;
+	}
+	GLuint createTexture(const char* src, int slot, int wrapType) //wrap type uses OpenGL #defines (GL_CLAMP_TO_EDGE, GL_REPEAT, etc.)
+	{
+		GLuint texture;
+		int h, w, comp;
+		unsigned char* image = stbi_load(src, &w, &h, &comp, STBI_rgb_alpha);
+		
+		glGenTextures(1, &texture);
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, texture);
+
+		if (wrapType != NULL)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapType);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapType);
+		}
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glGenerateMipmap(GL_TEXTURE_2D);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+		stbi_image_free(image);
+		return texture;
+		
+	}
+
+	void bindTexture(Shader* shader, int slot)
+	{
+		shader->enable();
+		glUniform1i(glGetUniformLocation(shader->getProgram(), "texture1"), slot);
+	}
+
+	void updateShader(Shader *shader, const char* uniform, mat4 elements)
+	{
+		
+		shader->enable();
+		glUniformMatrix4fv(glGetUniformLocation(shader->getProgram(), uniform), 1, false, elements.elements);
+
+	}
+private:
+
+	vec4 m_ClearColor = vec4(0.5f, 0.5f, 0.5f, 1.0f);
+
+};
 
 int main(int argc, char* argv[])
 {
 	Window window(1280,720,"title");
+	Engine* engine = new Engine;
 	Shader shader("shaders/basic.vert", "shaders/basic.frag");
 	Shader brick("shaders/basic.vert", "shaders/basic.frag");
 	Shader player("shaders/basic.vert", "shaders/basic.frag");
 
 	unsigned char* image;
 	int h, w, comp;
-	GLuint texture;
-
-	image = stbi_load("textures/yuh.jpg", &w, &h, &comp, STBI_rgb_alpha);
-	if (image == nullptr)
-		throw(std::string("Failed to load texture"));
-
-	glGenTextures(1, &texture);
-	glActiveTexture(GL_TEXTURE0 + 0);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glGenerateMipmap(GL_TEXTURE_2D);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-
-	
-	GLuint brickTex;
-	
-	image = stbi_load("textures/brick.jfif", &w, &h, &comp, STBI_rgb_alpha);
-	if (image == nullptr)
-		throw(std::string("Failed to load texture"));
-	glGenTextures(1, &brickTex);
-	glActiveTexture(GL_TEXTURE0 + 1);
-	glBindTexture(GL_TEXTURE_2D, brickTex);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glGenerateMipmap(GL_TEXTURE_2D);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-
-	GLuint playerTex;
-
-	image = stbi_load("textures/player.png", &w, &h, &comp, STBI_rgb_alpha);
-	if (image == nullptr)
-		throw(std::string("Failed to load texture"));
-	glGenTextures(1, &playerTex);
-	glActiveTexture(GL_TEXTURE0 + 2);
-	glBindTexture(GL_TEXTURE_2D, playerTex);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glGenerateMipmap(GL_TEXTURE_2D);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-
-	stbi_image_free(image);
+	GLuint texture = engine->createTexture("textures/heart.png", 0, NULL);
 
 
+	GLuint brickTex = engine->createTexture("textures/brick.jfif", 1, GL_REPEAT);
 
-	mat4 *camera = new mat4(1.0f);
+
+	GLuint playerTex = engine->createTexture("textures/player.png", 2, GL_CLAMP_TO_BORDER);
+
+	mat4 camera(1.0f);
 	mat4 ortho = mat4::orthographic(0.0f, 1000.0f, 0.0f, 562.5f, 100.0f, 1.0f);
-	shader.enable();
-	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "pr_matrix"), 1, false, ortho.elements);
-	glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "camera"), 1, false, camera->elements);
-	glUniform1i(glGetUniformLocation(shader.getProgram(), "texture1"), 0);
 
-	brick.enable();
-	glUniformMatrix4fv(glGetUniformLocation(brick.getProgram(), "pr_matrix"), 1, false, ortho.elements);
-	glUniformMatrix4fv(glGetUniformLocation(brick.getProgram(), "camera"), 1, false, camera->elements);
-	glUniform1i(glGetUniformLocation(brick.getProgram(), "texture1"), 1);
+	engine->updateShader(&shader, "pr_matrix", ortho);
+	engine->updateShader(&shader, "camera", camera);
+	engine->bindTexture(&shader, 0);
 
-	player.enable();
-	glUniformMatrix4fv(glGetUniformLocation(player.getProgram(), "pr_matrix"), 1, false, ortho.elements);
-	glUniformMatrix4fv(glGetUniformLocation(player.getProgram(), "camera"), 1, false, camera->elements);
-	glUniform1i(glGetUniformLocation(player.getProgram(), "texture1"), 2);
+	
+	engine->updateShader(&brick, "pr_matrix", ortho);
+	engine->updateShader(&brick, "camera", camera);
+	engine->bindTexture(&brick, 1);
+
+	engine->updateShader(&player, "pr_matrix", ortho);
+	engine->updateShader(&player, "camera", camera);
+	engine->bindTexture(&player, 2);
 
 
 	Square *square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), player);
@@ -108,11 +122,7 @@ int main(int argc, char* argv[])
 	vec2* cameraPos = new vec2;
 	cameraPos->x = 0;
 	cameraPos->y = 0;
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 
 	double x = 500;
 	double y = 0;
@@ -141,7 +151,7 @@ int main(int argc, char* argv[])
 				if(square1->getScreenPos().x > 800)
 				{
 					cameraPos->x += -5.0f;
-					camera = &mat4::translation(vec4(cameraPos->x, 0.0f, 0.0f, 0.0f));
+					camera = mat4::translation(vec4(cameraPos->x, 0.0f, 0.0f, 0.0f));
 					square1->changeXPos(square1->getPosition().x + 5.0f);
 				}
 				else
@@ -156,7 +166,7 @@ int main(int argc, char* argv[])
 			if (square1->getScreenPos().x < 200)
 			{
 				cameraPos->x += 5.0f;
-				camera = &mat4::translation(vec4(cameraPos->x, 0.0f, 0.0f, 0.0f));
+				camera = mat4::translation(vec4(cameraPos->x, 0.0f, 0.0f, 0.0f));
 				square1->changeXPos(square1->getPosition().x - 5.0);
 			}
 			else
@@ -166,14 +176,12 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		pEngine.CheckCollision(*square1,staticObjs, 13, *camera, *cameraPos); 
+		pEngine.CheckCollision(*square1,staticObjs, 13, camera, *cameraPos); 
 
-		shader.enable();
-		glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "camera"), 1, false, camera->elements);
-		brick.enable();
-		glUniformMatrix4fv(glGetUniformLocation(brick.getProgram(), "camera"), 1, false, camera->elements);
-		player.enable();
-		glUniformMatrix4fv(glGetUniformLocation(shader.getProgram(), "camera"), 1, false, camera->elements);
+		
+		engine->updateShader(&shader, "camera", camera);
+		engine->updateShader(&brick, "camera", camera);
+		engine->updateShader(&player, "camera", camera);
 
 		
 		layer1.submit(square2);

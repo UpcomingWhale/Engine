@@ -83,5 +83,8 @@
     <Image Include="textures\player.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="textures\heart.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
