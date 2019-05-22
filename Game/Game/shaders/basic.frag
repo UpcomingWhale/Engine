@@ -18,5 +18,5 @@ void main()
 	vec4 texColor = texture(texture1, fs_in.TexCoord);
 	if(texColor.a <0.1)
 		discard;
-	color = texColor;//* intensity;
+	color = fs_in.Ocolor;// texColor;//* intensity;
 }
