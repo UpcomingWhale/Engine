@@ -1,4 +1,15 @@
 #pragma once
+#include "include.h"
+
+struct VertexData
+{
+	vec3 vertex;
+	vec4 color;
+};
+
+
+
+
 class Square
 {
 protected:
