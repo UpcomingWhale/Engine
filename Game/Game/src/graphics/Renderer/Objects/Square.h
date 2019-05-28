@@ -23,6 +23,8 @@ protected:
 	GLuint textureID;
 	std::vector<vec2> m_UV;
 
+	float velocity = 0;
+
 	Shader& m_Shader;
 
 	GLuint count;
@@ -100,7 +102,7 @@ public:
 	vec2 getScreenPos() { return screenPos; }
 	void changeScreenPosX(float x) { screenPos.x = x; }
 	void changeScreenPosY(float y) { screenPos.y = y; }
-
-
+	void setVelocity(float v) { velocity = v; }
+	float getVelocity() { return velocity; }
 
 };
