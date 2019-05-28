@@ -19,8 +19,8 @@ void main()
 	vec4 texColor = fs_in.Ocolor;
 	if(fs_in.tid > 0.0)
 	{
-		int tid = int(fs_in.tid + 0.5);
-		texColor = texture(textures[tid], fs_in.TexCoord);
+		int tid = int(fs_in.tid);
+		texColor = texture(textures[1], fs_in.TexCoord);
 	}
 	if(texColor.a <0.1)
 		discard;

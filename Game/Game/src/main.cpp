@@ -12,7 +12,7 @@
 #define VERTEX_INDEX	0
 #define COLOR_INDEX		1
 #define TEXCORD_INDEX	2
-#define TID_INDEX		4
+#define TID_INDEX		3
 
 class Renderer2D
 {
@@ -42,18 +42,19 @@ public:
 		unsigned int c = 0;
 		if (tid > 0)
 		{	
-			float ts = 0.0f;
 			bool found = false;
 			for (int i = 0; i < m_TexSlots.size(); i++)
 			{
 				if (m_TexSlots[i] == tid)
 				{
-					ts = (float)i;
+					ts = (float)(i+1);
+					
 					found = true;
+					std::cout << "found" << std::endl;
+					std::cout << ts << std::endl;
 					break;
 				}
 			}
-
 			if (!found)
 			{
 				if (m_TexSlots.size() >= 32)
@@ -63,7 +64,8 @@ public:
 				begin();
 				}
 				m_TexSlots.push_back(tid);
-				ts = (float)(m_TexSlots.size() - 1);
+				std::cout << "Not found" << std::endl;
+				ts = (float)(m_TexSlots.size()-1);
 			}
 
 		}
@@ -76,24 +78,30 @@ public:
 
 			c = a << 24 | b << 16 | g << 8 | r;
 		}
+	
+		std::cout << ts << std::endl;
 		m_Buffer->vertex = position;
 		m_Buffer->color = c;
 		m_Buffer->uv = uv[0];
+		m_Buffer->tid = ts;
 		m_Buffer++;
 
 		m_Buffer->vertex = vec3(position.x, position.y+size.y, position.z);
 		m_Buffer->color = c;
 		m_Buffer->uv = uv[1];
+		m_Buffer->tid = ts;
 		m_Buffer++;
 
 		m_Buffer->vertex = vec3(position.x + size.x, position.y + size.y, position.z);
 		m_Buffer->color = c;
 		m_Buffer->uv = uv[2];
+		m_Buffer->tid = ts;
 		m_Buffer++;
 
 		m_Buffer->vertex = vec3(position.x + size.x, position.y, position.z);
 		m_Buffer->color = c;
 		m_Buffer->uv = uv[3];
+		m_Buffer->tid = ts;
 		m_Buffer++;
 
 		indexCount += 6;
@@ -242,31 +250,30 @@ int main(int argc, char* argv[])
 
 
 	GLuint playerTex = engine->createTexture("textures/player.png", 2, GL_CLAMP_TO_BORDER);
-
+	std::cout << playerTex << ", " << brickTex << ", " << texture << std::endl;
 	mat4 camera(1.0f);
 	mat4 ortho = mat4::orthographic(0.0f, 1000.0f, 0.0f, 562.5f, 100.0f, 1.0f);
 
 	engine->updateShader(&shader, "pr_matrix", ortho);
 	engine->updateShader(&shader, "camera", camera);
-	engine->bindTexture(&shader, 1);
-	glUniform1i(glGetUniformLocation(shader.getProgram(), "textures"), 10);
-	
-	engine->updateShader(&brick, "pr_matrix", ortho);
-	engine->updateShader(&brick, "camera", camera);
-	engine->bindTexture(&brick, 1);
 
-	engine->updateShader(&player, "pr_matrix", ortho);
-	engine->updateShader(&player, "camera", camera);
-	engine->bindTexture(&player, 2);
+	GLint texIds[] =
+	{
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+	};
+
+	glUniform1iv(glGetUniformLocation(shader.getProgram(), "textures"), 10l, texIds);
+	
+	
 
 
 	Square *square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), player, playerTex);
-	Square *square2 = new Square(vec4(900.0f, 300.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square3 = new Square(vec4(400.0f, 200.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square4 = new Square(vec4(700.0f, 150.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square5 = new Square(vec4(830.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square6 = new Square(vec4(950.0f, 140.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square7 = new Square(vec4(1050.0f, 540.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
+	Square *square2 = new Square(vec4(900.0f, 300.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
+	Square* square3 = new Square(vec4(400.0f, 200.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
+	Square* square4 = new Square(vec4(700.0f, 150.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
+	Square* square5 = new Square(vec4(830.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
+	Square* square6 = new Square(vec4(950.0f, 140.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
+	Square* square7 = new Square(vec4(1050.0f, 540.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
 	Square* square8 = new Square(vec4(1160.0f, 40.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
 	Square* square9 = new Square(vec4(1260.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
 	Square* square10 = new Square(vec4(1400.0f, 340.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
