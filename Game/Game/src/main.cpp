@@ -92,12 +92,12 @@ int main(int argc, char* argv[])
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 	};
 
-	glUniform1iv(glGetUniformLocation(shader.getProgram(), "textures"), 10l, texIds);
+	glUniform1iv(glGetUniformLocation(shader.getProgram(), "textures"), 10, texIds);
 	
 	
 
 
-	Square *square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), shader, playerTex);
+	Square *square1 = new Square(vec4(500.0f, 41, 3.0f, 0.0f), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), shader, playerTex);
 	Square *square2 = new Square(vec4(900.0f, 300.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
 	Square* square3 = new Square(vec4(400.0f, 200.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
 	Square* square4 = new Square(vec4(700.0f, 150.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, 1);
@@ -136,6 +136,7 @@ int main(int argc, char* argv[])
 	{
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		if (GetKeyState('W') & 0x8000)
 		{
 			square1->changeYPos(square1->getPosition().y + 5.0f);
