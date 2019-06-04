@@ -10,7 +10,7 @@ public:
 	
 	Engine()
 	{
-		glClearColor(0.5f, 0.5f, 0.5f ,1.0f);
+		glClearColor(m_ClearColor.x, m_ClearColor.y, m_ClearColor.z, m_ClearColor.a);
 
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
@@ -62,6 +62,66 @@ public:
 private:
 
 	vec4 m_ClearColor = vec4(0.5f, 0.5f, 0.5f, 1.0f);
+
+};
+
+class Layer {
+public:
+	Layer() {};
+	~Layer()
+	{
+
+	}
+
+	void SetRenderer(int renderer)
+	{
+		rendererId = renderer;
+	}
+
+	void submit(Square objs[1000], int count)
+	{
+		if (rendererId == 0)
+		{
+			for (int i = 0; i < count; i++)
+			{
+				BasicRenderer2D->submit(&objs[i]);
+			}
+		}
+		else if (rendererId == 1)
+		{
+			BatchRenderer2D->begin();
+			for (int i = 0; i < count; i++)
+			{
+				BatchRenderer2D->submit(&objs[i]);
+			}
+			BatchRenderer2D->end();
+		}
+		else
+		{
+			std::cout << "ERROR(NON FATEL):The renderer type needs to be set before you can submit objs to the layer" << std::endl;
+		}
+	}
+
+	void Draw()
+	{
+		if (rendererId == 0)
+		{
+			BasicRenderer2D->flush();
+		}
+		else if (rendererId == 1)
+		{
+			BatchRenderer2D->flush();
+		}
+	}
+
+private:
+	Renderer2D* BatchRenderer2D = new Renderer2D();
+	Basic2DLayer* BasicRenderer2D = new Basic2DLayer();
+	int rendererId = 3;
+};
+
+class Texture
+{
 
 };
 

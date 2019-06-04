@@ -15,19 +15,19 @@ C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\Physics\PhysicsEngi
 C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\Physics\PhysicsEngine.h(49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\Physics\PhysicsEngine.h(57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\Physics\PhysicsEngine.h(61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(142): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(146): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(156): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(161): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(171): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(176): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(75): warning C4101: 'comp': unreferenced local variable
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(74): warning C4101: 'image': unreferenced local variable
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(75): warning C4101: 'w': unreferenced local variable
-C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(75): warning C4101: 'h': unreferenced local variable
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(202): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(206): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(216): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(221): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(231): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(236): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(135): warning C4101: 'comp': unreferenced local variable
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(134): warning C4101: 'image': unreferenced local variable
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(135): warning C4101: 'w': unreferenced local variable
+C:\Users\Carter Miller\Documents\Github\Engine\Game\Game\src\main.cpp(135): warning C4101: 'h': unreferenced local variable
   Generating code
-  1 of 455 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  0 of 455 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Game.vcxproj -> C:\Users\Carter Miller\Documents\Github\Engine\Game\x64\Release\Game.exe

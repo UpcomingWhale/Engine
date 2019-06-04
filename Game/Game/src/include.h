@@ -26,3 +26,16 @@
 #include "graphics/Renderer/2DRenderer/Batch2dRenderer.h"
 
 #include "Physics/PhysicsEngine.h"
+
+
+
+
+
+
+
+
+
+
+
+#define Basic2DRenderer 0
+#define Batch2DRenderer 1
