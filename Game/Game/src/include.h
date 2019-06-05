@@ -1,4 +1,5 @@
 #pragma once
+#define SPEED 20.0f
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -19,10 +20,16 @@
 #include "Maths/eMaths.h"
 
 #include "utility/ShaderLoader.h"
+#include "graphics/Textures/Textures.h"
+
 
 #include "graphics/Renderer/Objects/Square.h"
 
+#include "graphics/Renderer/2DRenderer/Virtual2DRenderer.h"
 #include "graphics/Renderer/2DRenderer/2dRenderer.h"
 #include "graphics/Renderer/2DRenderer/Batch2dRenderer.h"
 
+#include "graphics/Layers/Layer.h"
+
 #include "Physics/PhysicsEngine.h"
+

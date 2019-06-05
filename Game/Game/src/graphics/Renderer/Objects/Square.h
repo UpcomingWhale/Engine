@@ -33,9 +33,10 @@ protected:
 
 	vec2 screenPos;
 public:
-	Square(vec4 position, vec2 size, vec4 color, Shader& shader, GLuint texture)
-		:m_Position(position), m_Size(size), m_Color(color), m_Shader(shader), textureID(texture)
+	Square(vec4 position, vec2 size, vec4 color, Shader& shader, Texture* texture)
+		:m_Position(position), m_Size(size), m_Color(color), m_Shader(shader)
 	{
+		textureID = texture->getTexID();
 		m_VertexArray = new VertexArray();
 		screenPos.x = position.x;
 		screenPos.y = position.y;

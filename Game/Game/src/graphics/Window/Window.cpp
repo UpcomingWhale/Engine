@@ -6,7 +6,7 @@ Window::Window(int width, int height, const char* title)
 	glewInit();
 	glfwInit();
 	window = glfwCreateWindow(width, height, title, NULL, NULL);
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	glfwMakeContextCurrent(window);
 }

@@ -24,14 +24,14 @@ public:
 					{
 						if (Player.getScreenPos().x > 800)
 						{
-							cameraPos.x += 5.0f;
+							cameraPos.x += SPEED;
 							camera = mat4::translation(vec4(cameraPos.x, 0.0f, 0.0f, 0.0f));
 							Player.changeXPos(staticObjs[i].getPosition().x - Player.getSize().x - 1.0f);
 
 						}
 						else
 						{
-							Player.changeScreenPosX(Player.getScreenPos().x - 5.0f);
+							Player.changeScreenPosX(Player.getScreenPos().x - SPEED);
 							Player.changeXPos(staticObjs[i].getPosition().x - Player.getSize().x - 1.0f);
 						}
 					}
@@ -39,13 +39,13 @@ public:
 					{
 						if (Player.getScreenPos().x < 200)
 						{
-							cameraPos.x += -5.0f;
+							cameraPos.x += -SPEED;
 							camera = mat4::translation(vec4(cameraPos.x, 0.0f, 0.0f, 0.0f));
 							Player.changeXPos(staticObjs[i].getPosition().x + staticObjs[i].getSize().x + 1.0f);
 						}
 						else
 						{
-							Player.changeScreenPosX(Player.getScreenPos().x + 5.0f);
+							Player.changeScreenPosX(Player.getScreenPos().x + SPEED);
 							Player.changeXPos(staticObjs[i].getPosition().x + staticObjs[i].getSize().x + 1.0f);
 						}
 					}

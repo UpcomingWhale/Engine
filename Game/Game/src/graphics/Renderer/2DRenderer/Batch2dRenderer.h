@@ -12,23 +12,23 @@
 #define TEXCORD_INDEX	2
 #define TID_INDEX		3
 
-class Renderer2D
+class BatchRenderer2D : public Renderer2D
 {
 public:
-	Renderer2D()
+	BatchRenderer2D()
 	{
 		init();
 	}
-	void begin()
+	void begin() override
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 	}
-	void end()
+	void end() override
 	{
 		glUnmapBuffer(GL_ARRAY_BUFFER);
 	}
-	void submit(const Square* renderable)
+	void submit(const Square* renderable) override
 	{
 
 		const vec3 position = vec3(renderable->getPosition().x, renderable->getPosition().y, renderable->getPosition().z);
@@ -101,7 +101,7 @@ public:
 
 		indexCount += 6;
 	}
-	void flush()
+	void flush() override
 	{
 		for (int i = 0; i < m_TexSlots.size(); i++)
 		{
