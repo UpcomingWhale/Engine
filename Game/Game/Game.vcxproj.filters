@@ -28,8 +28,8 @@
   <ItemGroup>
     <None Include="shaders\basic.frag" />
     <None Include="shaders\basic.vert" />
-    <None Include="editor\Editor.html" />
-    <None Include="editor\data.json" />
+    <None Include="Editor.html" />
+    <None Include="data.json" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stb_image.h">
