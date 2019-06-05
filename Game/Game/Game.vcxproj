@@ -136,8 +136,8 @@
     <ClCompile Include="src\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data.json" />
-    <None Include="Editor.html">
+    <None Include="editor\data.json" />
+    <None Include="editor\Editor.html">
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="shaders\basic.frag" />
