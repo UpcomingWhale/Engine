@@ -38,6 +38,8 @@ public:
 		layerShader->disable();
 	}
 
+	Shader* getShader()const { return layerShader; }
+
 private:
 
 	BatchRenderer2D* renderer = new BatchRenderer2D();
