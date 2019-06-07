@@ -19,7 +19,7 @@
 
 #include "Maths/eMaths.h"
 
-#include "utility/ShaderLoader.h"
+#include "utility/Shader.h"
 #include "graphics/Textures/Textures.h"
 
 
@@ -30,6 +30,8 @@
 #include "graphics/Renderer/2DRenderer/Batch2dRenderer.h"
 
 #include "graphics/Layers/Layer.h"
+
+#include "graphics/Scene/Scene.h"
 
 #include "Physics/PhysicsEngine.h"
 
