@@ -1,8 +1,8 @@
 ﻿  main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
   C:\Users\Carter Miller\Documents\GitHub\Engine\Game\dep\glfw-3.2.1\include\GLFW\glfw3.h(98): note: see previous definition of 'APIENTRY'
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\utility\ShaderLoader.h(46): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\utility\ShaderLoader.h(61): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\utility\Shader.h(59): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\utility\Shader.h(74): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\graphics\Renderer\Objects\Square.h(94): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\graphics\Renderer\Objects\Square.h(95): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\graphics\Renderer\2DRenderer\Batch2dRenderer.h(70): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
@@ -15,19 +15,15 @@ C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\Physics\PhysicsEngi
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\Physics\PhysicsEngine.h(49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\Physics\PhysicsEngine.h(57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\Physics\PhysicsEngine.h(61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(150): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(154): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(164): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(169): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(179): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(184): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(79): warning C4101: 'comp': unreferenced local variable
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(78): warning C4101: 'image': unreferenced local variable
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(79): warning C4101: 'w': unreferenced local variable
-C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(79): warning C4101: 'h': unreferenced local variable
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(108): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(113): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(124): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(129): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  1 of 522 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
+  8 of 587 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
     8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Game.vcxproj -> C:\Users\Carter Miller\Documents\GitHub\Engine\Game\x64\Release\Game.exe
