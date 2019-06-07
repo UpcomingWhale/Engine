@@ -77,10 +77,13 @@
     <ClInclude Include="src\graphics\Textures\Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\Scene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\utility\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\Scene\Scene.h">
+    <ClInclude Include="src\utility\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

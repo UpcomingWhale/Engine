@@ -22,8 +22,8 @@ C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(113): warn
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(124): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Carter Miller\Documents\GitHub\Engine\Game\Game\src\main.cpp(129): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  8 of 587 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+  5 of 587 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    9 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Game.vcxproj -> C:\Users\Carter Miller\Documents\GitHub\Engine\Game\x64\Release\Game.exe
