@@ -33,6 +33,6 @@ public:
 
 private:
 
-	GLuint m_Texture;
+	GLuint m_Texture = 0;
 
 };

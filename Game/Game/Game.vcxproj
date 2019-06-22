@@ -145,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\Layers\Layer.h" />
-    <ClInclude Include="src\graphics\Renderer\2DRenderer\2dRenderer.h" />
     <ClInclude Include="src\graphics\Renderer\2DRenderer\Batch2dRenderer.h" />
     <ClInclude Include="src\graphics\Renderer\2DRenderer\Virtual2DRenderer.h" />
     <ClInclude Include="src\graphics\Renderer\Objects\Square.h" />

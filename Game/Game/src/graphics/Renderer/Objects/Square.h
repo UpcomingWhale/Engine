@@ -20,12 +20,11 @@ protected:
 	vec4 m_Color;
 	VertexArray* m_VertexArray;
 	IndexBuffer* m_IndexBuffer;
-	GLuint textureID;
+	GLuint textureID = 0;
 	std::vector<vec2> m_UV;
 
 	float velocity = 0;
 
-	Shader& m_Shader;
 
 	GLuint count;
 	bool colX = false;
@@ -33,10 +32,14 @@ protected:
 
 	vec2 screenPos;
 public:
-	Square(vec4 position, vec2 size, vec4 color, Shader& shader, Texture* texture)
-		:m_Position(position), m_Size(size), m_Color(color), m_Shader(shader)
+	Square(vec4 position, vec2 size, vec4 color, Texture* texture)
+		:m_Position(position), m_Size(size), m_Color(color)
 	{
-		textureID = texture->getTexID();
+		if (texture != NULL)
+		{
+			textureID = texture->getTexID();
+		}
+		
 		m_VertexArray = new VertexArray();
 		screenPos.x = position.x;
 		screenPos.y = position.y;
@@ -85,7 +88,6 @@ public:
 
 	inline const VertexArray* getVAO() const { return m_VertexArray; }
 	inline const IndexBuffer* getIBO() const { return m_IndexBuffer; }
-	inline Shader& getShader() const { return m_Shader; }
 	inline const GLuint getCount() const { return count; }
 
 	inline const  vec4& getPosition() const { return m_Position; }

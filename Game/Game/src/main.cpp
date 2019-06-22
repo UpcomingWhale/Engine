@@ -4,15 +4,42 @@
 
 #include <chrono>
 
+class Input
+{
+public:
+	bool IsKeyPressed(GLFWwindow* window, int keycode)
+	{
+		bool state = glfwGetKey(window, keycode);
+		return state == GLFW_PRESS || state == GLFW_REPEAT;
+	}
+
+	bool IsMouseButtonPressed(GLFWwindow* window, int button)
+	{
+		bool state = glfwGetMouseButton(window, button);
+		return state == GLFW_PRESS;
+	}
+
+	float GetMouseX(GLFWwindow* window)
+	{
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);
+		return (float)xpos;
+	}
+	float GetMouseY(GLFWwindow* window)
+	{
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);
+		return (float)ypos;
+	}
+
+};
+
+
 
 
 int main(int argc, char* argv[])
 {
-	glEnable(GL_DEPTH_TEST);
-
-	glEnable(GL_BLEND);
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 
 	Window window(1920,1080,"title");
 	Shader shader("shaders/basic.vert", "shaders/basic.frag");
@@ -26,37 +53,27 @@ int main(int argc, char* argv[])
 	
 
 	mat4 camera(1.0f);
-	mat4 ortho = mat4::orthographic(0.0f, 1000.0f, 0.0f, 562.5f, 1.0f, 100.0f);
 
-	shader.setMat4fv("pr_matrix", ortho);
-	shader.setMat4fv("camera", camera);
 
-	GLint texIds[] =
-	{
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-	};
-
-	shader.set1iv("textures", 10, texIds);
 	
 
-	Square* square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), shader, playerTex);
-	Square *square2 = new Square(vec4(900.0f, 300.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square3 = new Square(vec4(400.0f, 200.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square4 = new Square(vec4(700.0f, 150.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square5 = new Square(vec4(830.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square6 = new Square(vec4(950.0f, 140.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square7 = new Square(vec4(1050.0f, 540.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square8 = new Square(vec4(1160.0f, 40.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square9 = new Square(vec4(1260.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
-	Square* square10 = new Square(vec4(1400.0f, 340.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), shader, texture);
+	Square* square1 = new Square(vec4(500.0f, 41, 3.0f, 0), vec2(40, 80), vec4(1.0f, 0.3f, 1.0f, 1.0f), playerTex);
+	Square *square2 = new Square(vec4(900.0f, 300.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square3 = new Square(vec4(400.0f, 200.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square4 = new Square(vec4(700.0f, 150.0f, 3.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square5 = new Square(vec4(830.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square6 = new Square(vec4(950.0f, 140.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square7 = new Square(vec4(1050.0f, 540.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f),texture);
+	Square* square8 = new Square(vec4(1160.0f, 40.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square9 = new Square(vec4(1260.0f, 240.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
+	Square* square10 = new Square(vec4(1400.0f, 340.0f, 4.0f, 0.0f), vec2(70, 60), vec4(1.0f, 0.0f, 1.0f, 1.0f), texture);
 
-	Square* left_wall = new Square(vec4(-100.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader, brickTex);
-	Square* floor = new Square(vec4(0.0f, 0.0f, 3.0f, 0.0f), vec2(4000.0f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader, brickTex);
-	Square* ceiling = new Square(vec4(0.0f, 522.5f, 3.0f, 0.0f), vec2(4000.f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader, brickTex);
-	Square* right_wall = new Square(vec4(4000.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader, brickTex);
+	Square* left_wall = new Square(vec4(-100.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
+	Square* floor = new Square(vec4(0.0f, 0.0f, 3.0f, 0.0f), vec2(4000.0f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
+	Square* ceiling = new Square(vec4(0.0f, 522.5f, 3.0f, 0.0f), vec2(4000.f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
+	Square* right_wall = new Square(vec4(4000.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
 
-	Square* background = new Square(vec4(1.0f, 0.0f, 900.0f, 0.0f), vec2(500, 500), vec4(0.2f, 0.2f, 0.2f, 1.0f), shader, brickTex);
-
+	Square* background = new Square(vec4(1.0f, 0.0f, 900.0f, 0.0f), vec2(500, 500), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
 	vec2* cameraPos = new vec2;
 	cameraPos->x = 0;
 	cameraPos->y = 0;
@@ -65,8 +82,8 @@ int main(int argc, char* argv[])
 
 
 	Scene* scene = new Scene();
-	scene->newLayer(1);
-	scene->newLayer(0);
+	int layer1 = scene->newLayer(1);
+	int layer2 = scene->newLayer(0);
 
 
 	double x = 500;
@@ -80,6 +97,7 @@ int main(int argc, char* argv[])
 
 	PhysicsEngine pEngine;
 
+	Input input;
 
 	while (!window.ShouldClose())
 	{
@@ -88,7 +106,7 @@ int main(int argc, char* argv[])
 		if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - ms > 16.6)
 		{
 
-			if (GetKeyState('W') & 0x8000)
+			if (input.IsKeyPressed(window.getWindow(),GLFW_KEY_W) == true)
 			{
 				square1->changeYPos(square1->getPosition().y + SPEED);
 			}
@@ -128,14 +146,15 @@ int main(int argc, char* argv[])
 					square1->changeScreenPosX(square1->getScreenPos().x - SPEED);
 					square1->changeXPos(square1->getPosition().x - SPEED);
 				}
+
 			}
 
 			pEngine.CheckCollision(*square1, staticObjs, 13, *scene->getCamera(), *cameraPos);
-			ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
 		}
 		
-		scene->submit(1, renderables, 14);
-		scene->submit(0, background);
+		scene->submit(layer2, renderables, 14);
+		scene->submit(layer1, background);
 		scene->drawScene();
 		window.update();
 	}

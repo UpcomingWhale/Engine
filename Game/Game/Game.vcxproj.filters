@@ -56,9 +56,6 @@
     <ClInclude Include="src\Maths\eMaths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\Renderer\2DRenderer\2dRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\Renderer\Objects\Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>

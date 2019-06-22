@@ -4,7 +4,10 @@ class Layer
 {
 public:
 
-	Layer() {};
+	Layer()
+	{
+		
+	};
 	~Layer() {};
 
 	void submit(Square* square)
@@ -17,11 +20,6 @@ public:
 		{
 			squareArray.push_back(squares[i]);
 		}
-	}
-
-	void setShader(Shader* shader)
-	{
-		layerShader = shader;
 	}
 
 	void drawLayer()
@@ -44,5 +42,5 @@ private:
 
 	BatchRenderer2D* renderer = new BatchRenderer2D();
 	std::vector<Square*> squareArray;
-	Shader* layerShader = nullptr;
+	Shader* layerShader = new Shader("shaders/basic.vert", "shaders/basic.frag");
 };
