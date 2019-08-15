@@ -1,5 +1,7 @@
 #define _USE_MATH_DEFINES
 
+#define TICK_RATE 1000/ 60
+
 #include "include.h"
 
 #include <chrono>
@@ -35,7 +37,10 @@ public:
 };
 
 
-
+auto currentTimeInMs()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+}
 
 int main(int argc, char* argv[])
 {
@@ -93,7 +98,7 @@ int main(int argc, char* argv[])
 
 	Square* renderables[] = { square1, square2, square3, square4, square5, square6, square7, square8, square9, square10, left_wall, right_wall, ceiling, floor };
 
-	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	auto processedTime = currentTimeInMs();
 
 	PhysicsEngine pEngine;
 
@@ -103,10 +108,10 @@ int main(int argc, char* argv[])
 	{
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - ms > 16.6)
-		{
 
-			if (input.IsKeyPressed(window.getWindow(),GLFW_KEY_W) == true)
+		while ((processedTime + TICK_RATE) < currentTimeInMs()) {
+
+			if (input.IsKeyPressed(window.getWindow(), GLFW_KEY_W) == true)
 			{
 				square1->changeYPos(square1->getPosition().y + SPEED);
 			}
@@ -150,9 +155,8 @@ int main(int argc, char* argv[])
 			}
 
 			pEngine.CheckCollision(*square1, staticObjs, 13, *scene->getCamera(), *cameraPos);
-
+			processedTime += TICK_RATE;
 		}
-		
 		scene->submit(layer2, renderables, 14);
 		scene->submit(layer1, background);
 		scene->drawScene();

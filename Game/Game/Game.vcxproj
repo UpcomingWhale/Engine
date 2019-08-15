@@ -119,7 +119,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep\glew-2.1.0\include;$(SolutionDir)dep\glfw-3.2.1\include;$(SolutionDir)Game\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dep\glew-2.1.0\include;$(SolutionDir)Game Engine\src;$(SolutionDir)dep\glfw-3.2.1\include;$(SolutionDir)Game\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -131,9 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\graphics\Window\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data.json" />
@@ -146,20 +144,8 @@
   <ItemGroup>
     <ClInclude Include="src\graphics\Layers\Layer.h" />
     <ClInclude Include="src\graphics\Renderer\2DRenderer\Batch2dRenderer.h" />
-    <ClInclude Include="src\graphics\Renderer\2DRenderer\Virtual2DRenderer.h" />
     <ClInclude Include="src\graphics\Renderer\Objects\Square.h" />
     <ClInclude Include="src\graphics\Scene\Scene.h" />
-    <ClInclude Include="src\graphics\Textures\Textures.h" />
-    <ClInclude Include="src\graphics\Window\Window.h" />
-    <ClInclude Include="src\include.h" />
-    <ClInclude Include="src\Maths\eMaths.h" />
-    <ClInclude Include="src\opengl\Buffers\Buffer.h" />
-    <ClInclude Include="src\opengl\Buffers\IndexBuffer.h" />
-    <ClInclude Include="src\opengl\Buffers\VertexArray.h" />
-    <ClInclude Include="src\Physics\PhysicsEngine.h" />
-    <ClInclude Include="src\stb_image.h" />
-    <ClInclude Include="src\utility\FileReader.h" />
-    <ClInclude Include="src\utility\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\brick.jfif" />
@@ -168,6 +154,11 @@
     <Image Include="textures\player.jpg" />
     <Image Include="textures\player.png" />
     <Image Include="textures\yuh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Game Engine\Game Engine.vcxproj">
+      <Project>{ba246223-38db-45c6-b040-e2fb14158c36}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
