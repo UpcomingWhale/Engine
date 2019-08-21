@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Physics\Physics.h" />
     <ClInclude Include="src\Physics\PhysicsEngine.h" />
     <ClInclude Include="src\graphics\Layers\Layer.h" />
     <ClInclude Include="src\graphics\Renderer\2DRenderer\Batch2dRenderer.h" />

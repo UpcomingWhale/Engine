@@ -1,5 +1,8 @@
 #pragma once
 #include "include.h"
+
+
+
 class PhysicsEngine
 {
 private:
@@ -12,6 +15,7 @@ public:
 	{
 
 	}
+
 	void CheckCollision(Square& Player, Square staticObjs[100], int sObjCount, mat4& camera, vec2& cameraPos)
 	{
 		for (int i = 0; i < sObjCount; i++)
@@ -75,6 +79,16 @@ public:
 
 		}
 	}
+
+	void UpdateObj(Square& obj)
+	{
+		
+		obj.setAcceleration(vec2(0.0f, obj.getAcceleration().y + GRAVITY));
+		
+
+	}
+
+
 private:
 	bool isCollidingX(Square & one, Square & two)
 	{

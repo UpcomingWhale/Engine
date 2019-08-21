@@ -23,14 +23,13 @@ protected:
 	GLuint textureID = 0;
 	std::vector<vec2> m_UV;
 
-	float velocity = 0;
-
-
 	GLuint count;
 	bool colX = false;
 	bool colY = false;
 
 	vec2 screenPos;
+
+	PhysicsObj PO;
 public:
 	Square(vec4 position, vec2 size, vec4 color, Texture* texture)
 		:m_Position(position), m_Size(size), m_Color(color)
@@ -105,7 +104,10 @@ public:
 	vec2 getScreenPos() { return screenPos; }
 	void changeScreenPosX(float x) { screenPos.x = x; }
 	void changeScreenPosY(float y) { screenPos.y = y; }
-	void setVelocity(float v) { velocity = v; }
-	float getVelocity() { return velocity; }
+	
+	void setAcceleration(vec2 a) { PO.acceration = a; }
+	void setVelocity(vec2 v) { PO.velocity = v; }
+	vec2 getAcceleration() { return PO.acceration; }
+	vec2 getVelocity() { return PO.velocity; }
 
 };

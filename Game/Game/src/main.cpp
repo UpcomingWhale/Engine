@@ -1,6 +1,8 @@
 #define _USE_MATH_DEFINES
 
-#define TICK_RATE 1000/ 60
+
+
+
 
 #include "include.h"
 
@@ -40,6 +42,11 @@ public:
 auto currentTimeInMs()
 {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+}
+
+void jump(Square* player)
+{
+	player->setAcceleration(vec2(0.0f, 200.0f));
 }
 
 int main(int argc, char* argv[])
@@ -111,15 +118,7 @@ int main(int argc, char* argv[])
 
 		while ((processedTime + TICK_RATE) < currentTimeInMs()) {
 
-			if (input.IsKeyPressed(window.getWindow(), GLFW_KEY_W) == true)
-			{
-				square1->changeYPos(square1->getPosition().y + SPEED);
-			}
-			if (GetKeyState('S') & 0x8000)
-			{
-				square1->changeYPos(square1->getPosition().y - SPEED);
-			}
-			if (GetKeyState('D') & 0x8000/*Check if high-order bit is set (1 << 15)*/)
+			if (input.IsKeyPressed(window.getWindow(), GLFW_KEY_D))
 			{
 
 
@@ -136,7 +135,7 @@ int main(int argc, char* argv[])
 					square1->changeXPos(square1->getPosition().x + SPEED);
 				}
 			}
-			if (GetKeyState('A') & 0x8000/*Check if high-order bit is set (1 << 15)*/)
+			if (input.IsKeyPressed(window.getWindow(), GLFW_KEY_A))
 			{
 
 				if (square1->getScreenPos().x < 200)
@@ -153,6 +152,23 @@ int main(int argc, char* argv[])
 				}
 
 			}
+
+			if (input.IsKeyPressed(window.getWindow(), GLFW_KEY_SPACE))
+			{
+				jump(square1);
+			}
+			if (square1->getPosition().y > floor->getSize().y+1)
+			{
+				std::cout << square1->getAcceleration().y << std::endl;
+				square1->setAcceleration(vec2(0.0f, square1->getAcceleration().y - 1.0f ));
+				square1->setVelocity(vec2(0.0f, square1->getVelocity().y + square1->getAcceleration().y));
+			}
+
+			square1->changeYPos(square1->getPosition().y + square1->getVelocity().y);
+
+			//std::cout << square1->getVelocity().y << std::endl;
+
+			
 
 			pEngine.CheckCollision(*square1, staticObjs, 13, *scene->getCamera(), *cameraPos);
 			processedTime += TICK_RATE;
