@@ -38,6 +38,10 @@ public:
 	{
 		glUniform1iv(glGetUniformLocation(getProgram(), uniform), size, arry);
 	}
+	void set2f(const char* uniform, vec2 vec)
+	{
+		glUniform2f(glGetUniformLocation(getProgram(), uniform), vec.x, vec.y);
+	}
 
 private:
 	GLuint load() {

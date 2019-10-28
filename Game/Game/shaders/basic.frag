@@ -13,9 +13,18 @@ in DATA
 
 uniform sampler2D textures[32];
 
+uniform vec3 lights[32];
+
 void main()
 {
-	float intensity = 1.0/ length(fs_in.position.xy - light_pos);
+	float intensity = step(length(fs_in.position.xy - light_pos), 200) * 0.4;
+	/*if(length(fs_in.position.xy - light_pos) < 200)
+	{
+	intensity = 0.4;
+	}
+	else{
+	intensity = 0;
+	}*/
 	vec4 texColor = fs_in.Ocolor;
 	if(fs_in.tid > 0.0)
 	{
@@ -24,5 +33,5 @@ void main()
 	}
 	if(texColor.a <0.1)
 		discard;
-	color = texColor;//* intensity;
+	color = texColor * intensity;
 }

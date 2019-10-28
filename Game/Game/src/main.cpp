@@ -8,6 +8,11 @@
 
 #include <chrono>
 
+#include "src/imgui.h"
+#include "src/imgui_impl_opengl3.h"
+#include "src/imgui_impl_glfw.h"
+
+
 class Input
 {
 public:
@@ -37,6 +42,7 @@ public:
 	}
 
 };
+
 
 
 auto currentTimeInMs()
@@ -85,12 +91,12 @@ int main(int argc, char* argv[])
 	Square* ceiling = new Square(vec4(0.0f, 522.5f, 3.0f, 0.0f), vec2(4000.f, 40.0f), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
 	Square* right_wall = new Square(vec4(4000.0f, 0.0f, 3.0f, 0.0f), vec2(200, 800), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
 
-	Square* background = new Square(vec4(1.0f, 0.0f, 900.0f, 0.0f), vec2(500, 500), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
+	//Square* background = new Square(vec4(1.0f, 0.0f, 900.0f, 0.0f), vec2(1000, 1000), vec4(0.2f, 0.2f, 0.2f, 1.0f), brickTex);
 	vec2* cameraPos = new vec2;
 	cameraPos->x = 0;
 	cameraPos->y = 0;
 	
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 
 	Scene* scene = new Scene();
@@ -111,8 +117,39 @@ int main(int argc, char* argv[])
 
 	Input input;
 
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+
+	ImGui_ImplGlfw_InitForOpenGL(window.getWindow(), true);
+	ImGui_ImplOpenGL3_Init("#version 330");
+
+	ImGui::StyleColorsDark();
+
+	
+	unsigned char* pixels;
+	int width, height;
+	io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);   // Load as RGBA 32-bits (75% of the memory is wasted, but default font is so small) because it is more likely to be compatible with user's existing shaders. If your ImTextureId represent a higher-level concept than just a GL texture id, consider calling GetTexDataAsAlpha8() instead to save on GPU memory.
+	static GLuint g_FontTexture;
+	// Upload texture to graphics system
+	GLint last_texture;
+	glGetIntegerv(GL_TEXTURE_BINDING_2D, &last_texture);
+	glGenTextures(1, &g_FontTexture);
+	glBindTexture(GL_TEXTURE_2D, g_FontTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	while (!window.ShouldClose())
 	{
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
+		ImGui::Begin("Window");
+		ImGui::Button("Button", ImVec2(100, 100));
+		ImGui::End();
+
+		
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -173,11 +210,19 @@ int main(int argc, char* argv[])
 			pEngine.CheckCollision(*square1, staticObjs, 13, *scene->getCamera(), *cameraPos);
 			processedTime += TICK_RATE;
 		}
+		
+		scene->updateLight(vec2(square1->getPosition().x+40, square1->getPosition().y+40));
 		scene->submit(layer2, renderables, 14);
-		scene->submit(layer1, background);
+		//scene->submit(layer1, background);
 		scene->drawScene();
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		window.update();
+		
+		
 	}
 	
 	return 0;
 }
+
+

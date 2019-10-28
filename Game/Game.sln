@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game Engine", "Game Engine\Game Engine.vcxproj", "{BA246223-38DB-45C6-B040-E2FB14158C36}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgui", "imgui\imgui.vcxproj", "{7811CB37-1798-4A70-8274-8B5AA81D9B2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{BA246223-38DB-45C6-B040-E2FB14158C36}.Release|x64.Build.0 = Release|x64
 		{BA246223-38DB-45C6-B040-E2FB14158C36}.Release|x86.ActiveCfg = Release|Win32
 		{BA246223-38DB-45C6-B040-E2FB14158C36}.Release|x86.Build.0 = Release|Win32
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Debug|x64.ActiveCfg = Debug|x64
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Debug|x64.Build.0 = Debug|x64
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Debug|x86.ActiveCfg = Debug|Win32
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Debug|x86.Build.0 = Debug|Win32
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Release|x64.ActiveCfg = Release|x64
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Release|x64.Build.0 = Release|x64
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Release|x86.ActiveCfg = Release|Win32
+		{7811CB37-1798-4A70-8274-8B5AA81D9B2C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

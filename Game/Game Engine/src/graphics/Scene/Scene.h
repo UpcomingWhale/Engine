@@ -29,12 +29,16 @@ public:
 	{
 		Layers[index]->submit(square, count);
 	}
-
+	void updateLight(vec2 pos)
+	{
+		light_pos = pos;
+	}
 	void drawScene()
 	{
 		for (int i = 0; i < Layers.size(); i++)
 		{
 			Layers[i]->getShader()->setMat4fv("camera", *camera);
+			Layers[i]->getShader()->set2f("light_pos", light_pos);
 			Layers[i]->drawLayer();
 		}
 	}
@@ -60,4 +64,5 @@ private:
 	mat4 ortho = mat4::orthographic(0.0f, 1000.0f, 0.0f, 562.5f, 100.0f, 1.0f);
 	mat4 persp = mat4::perspective(90.0f, 16.0f / 9.0f, 1.0f, 1000.0f);
 	int uiLayer;
+	vec2 light_pos;
 };
