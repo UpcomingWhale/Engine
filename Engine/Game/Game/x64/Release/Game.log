@@ -1,0 +1,31 @@
+﻿  main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\dep\glfw-3.2.1\include\GLFW\glfw3.h(98): note: see previous definition of 'APIENTRY'
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\utility\Shader.h(59): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\utility\Shader.h(74): warning C4805: '!=': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Renderer\Objects\Square.h(96): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Renderer\Objects\Square.h(97): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Renderer\2DRenderer\Batch2dRenderer.h(70): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Renderer\2DRenderer\Batch2dRenderer.h(71): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Renderer\2DRenderer\Batch2dRenderer.h(72): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Renderer\2DRenderer\Batch2dRenderer.h(73): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\graphics\Scene\Scene.h(22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\Physics\PhysicsEngine.h(29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\Physics\PhysicsEngine.h(35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\Physics\PhysicsEngine.h(44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\Physics\PhysicsEngine.h(49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\Physics\PhysicsEngine.h(57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game Engine\src\Physics\PhysicsEngine.h(61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(23): warning C4806: '==': unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(203): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(207): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(218): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(223): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(234): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(239): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\Game\src\main.cpp(188): warning C4101: 'positions': unreferenced local variable
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1877 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Game.vcxproj -> C:\Users\Carter Miller\Documents\GitHub\Engine\Engine\Game\x64\Release\Game.exe
